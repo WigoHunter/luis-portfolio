@@ -18,12 +18,12 @@ h1, h2, h3, p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
 
-.luis-wrap h2 {
-  font-size: 36px;
-  color: #EEE;
-  margin-bottom: 20px;
+  & h2 {
+    font-size: 36px;
+    color: #EEE;
+    margin-bottom: 20px;
+  }
 }
 
 .luis-wrap input[type='text'] {
