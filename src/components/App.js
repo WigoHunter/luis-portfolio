@@ -10,7 +10,9 @@ class App extends Component {
         <LUISWrap
           luisUrl="https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query="
           intents={["WhatDidYouDo", "WhatDidYouLearn"]}
-        />
+        >
+          <p className="pull-right">Hello World</p>
+        </LUISWrap>
       </div>
     );
   }

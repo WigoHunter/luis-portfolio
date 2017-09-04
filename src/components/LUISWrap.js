@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import 'whatwg-fetch';
 
-import LUISResult from './LUISResult.js';
-
 class LUISWrap extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            openChat: false,
             query: "Microsoft?",
             intent: "WhatDidYouLearn",
             company: "Microsoft"
         };
+
+        this.toggleChat = this.toggleChat.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +32,12 @@ class LUISWrap extends Component {
         
     }
 
+    toggleChat() {
+        this.setState({
+            openChat: !this.state.openChat
+        });
+    }
+
     submitLUISQuery(e) {
         e.preventDefault();
         
@@ -38,20 +45,19 @@ class LUISWrap extends Component {
     }
 
     render() {
-        const { intents } = this.props;
+        const { intents, children } = this.props;
+        const { openChat } = this.state;
 
         return (
             <div className="luis-wrap">
-                <h2>What Do You Want to Know About Me</h2>
-                <form onSubmit={e => this.submitLUISQuery(e)}>
-                    <input type="text" ref="query" />
-                </form>
+                <div className={`luis-chat ${openChat && "open"}`}>
+                    <h2 onClick={() => this.toggleChat()}>Mr. ChatWeb</h2>
+                    {/*<form onSubmit={e => this.submitLUISQuery(e)}>
+                        <input type="text" ref="query" />
+                    </form>*/}
+                </div>
 
-                {/*intents.map(intent => (
-                    intent === this.state.intent
-                        ? <LUISResult result={intent} />
-                        : ""
-                ))*/}
+                {children}
             </div>
         );
     }
