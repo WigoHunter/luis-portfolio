@@ -1,226 +1,277 @@
 {
-  "luis_schema_version": "1.3.0",
-  "name": "PortfolioBot",
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "portfolio",
   "desc": "",
   "culture": "en-us",
   "intents": [
     {
+      "name": "greet"
+    },
+    {
       "name": "None"
     },
     {
-      "name": "SearchHotels"
+      "name": "WhatDidYouDo"
     },
     {
-      "name": "ShowHotelsReviews"
-    },
-    {
-      "name": "Help"
+      "name": "WhatDidYouLearn"
     }
   ],
   "entities": [
     {
-      "name": "Hotel"
-    },
-    {
-      "name": "AirportCode"
+      "name": "Company"
     }
   ],
   "composites": [],
   "closedLists": [],
-  "bing_entities": [
-    "geography"
-  ],
+  "bing_entities": [],
   "actions": [],
-  "model_features": [
-    {
-      "name": "Near",
-      "mode": true,
-      "words": "near,around,close,nearby",
-      "activated": true
-    },
-    {
-      "name": "Show",
-      "mode": true,
-      "words": "show,find,look,search",
-      "activated": true
-    }
-  ],
-  "regex_features": [
-    {
-      "name": "AirportCodeRegex",
-      "pattern": "[a-z]{3}",
-      "activated": true
-    }
-  ],
+  "model_features": [],
+  "regex_features": [],
   "utterances": [
     {
-      "text": "look for hotels in miami",
-      "intent": "SearchHotels",
+      "text": "hello",
+      "intent": "greet",
       "entities": []
     },
     {
-      "text": "search for hotels in seattle",
-      "intent": "SearchHotels",
+      "text": "hi",
+      "intent": "greet",
       "entities": []
     },
     {
-      "text": "show me hotels in california",
-      "intent": "SearchHotels",
+      "text": "how are you",
+      "intent": "greet",
       "entities": []
     },
     {
-      "text": "show me the reviews of the amazing bot resort",
-      "intent": "ShowHotelsReviews",
+      "text": "how is it going",
+      "intent": "greet",
+      "entities": []
+    },
+    {
+      "text": "hi kevin",
+      "intent": "greet",
+      "entities": []
+    },
+    {
+      "text": "what did you do at microsoft",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 5,
-          "endPos": 8
+          "entity": "Company",
+          "startPos": 19,
+          "endPos": 27
         }
       ]
     },
     {
-      "text": "can i see the reviews of extended bot hotel?",
-      "intent": "ShowHotelsReviews",
+      "text": "how was your experience at microsoft",
+      "intent": "WhatDidYouLearn",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 6,
-          "endPos": 8
+          "entity": "Company",
+          "startPos": 27,
+          "endPos": 35
         }
       ]
     },
     {
-      "text": "find reviews of hotelxya",
-      "intent": "ShowHotelsReviews",
+      "text": "can you share more about what you learned at microsoft",
+      "intent": "WhatDidYouLearn",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 3,
-          "endPos": 3
+          "entity": "Company",
+          "startPos": 45,
+          "endPos": 53
         }
       ]
     },
     {
-      "text": "show me reviews of the amazing hotel",
-      "intent": "ShowHotelsReviews",
+      "text": "what have you learnt with 25sprout",
+      "intent": "WhatDidYouLearn",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 4,
-          "endPos": 6
+          "entity": "Company",
+          "startPos": 26,
+          "endPos": 33
         }
       ]
     },
     {
-      "text": "what can i do?",
-      "intent": "Help",
-      "entities": []
-    },
-    {
-      "text": "help me",
-      "intent": "Help",
-      "entities": []
-    },
-    {
-      "text": "what are the available options?",
-      "intent": "Help",
-      "entities": []
-    },
-    {
-      "text": "i need help",
-      "intent": "Help",
-      "entities": []
-    },
-    {
-      "text": "best hotels in seattle",
-      "intent": "SearchHotels",
-      "entities": []
-    },
-    {
-      "text": "hotels in los angeles",
-      "intent": "SearchHotels",
-      "entities": []
-    },
-    {
-      "text": "can you show me hotels from los angeles?",
-      "intent": "SearchHotels",
-      "entities": []
-    },
-    {
-      "text": "can you show me the reviews of the amazing resort & hotel",
-      "intent": "ShowHotelsReviews",
+      "text": "what did you learn at microsoft",
+      "intent": "WhatDidYouLearn",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 7,
-          "endPos": 11
+          "entity": "Company",
+          "startPos": 22,
+          "endPos": 30
         }
       ]
     },
     {
-      "text": "what are the reviews of the hotel bot framework?",
-      "intent": "ShowHotelsReviews",
+      "text": "what did you accomplish at microsoft",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "Hotel",
-          "startPos": 5,
-          "endPos": 8
+          "entity": "Company",
+          "startPos": 27,
+          "endPos": 35
         }
       ]
     },
     {
-      "text": "find hotels near eze",
-      "intent": "SearchHotels",
+      "text": "can you share some of your projects at microsoft?",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "AirportCode",
-          "startPos": 3,
-          "endPos": 3
+          "entity": "Company",
+          "startPos": 39,
+          "endPos": 47
         }
       ]
     },
     {
-      "text": "where can i stay near nnn?",
-      "intent": "SearchHotels",
+      "text": "what was your job at 25sprout",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "AirportCode",
-          "startPos": 5,
-          "endPos": 5
+          "entity": "Company",
+          "startPos": 21,
+          "endPos": 28
         }
       ]
     },
     {
-      "text": "show hotels near att airport",
-      "intent": "SearchHotels",
+      "text": "what have you been doing at microsoft",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "AirportCode",
-          "startPos": 3,
-          "endPos": 3
+          "entity": "Company",
+          "startPos": 28,
+          "endPos": 36
         }
       ]
     },
     {
-      "text": "find hotels near agl",
-      "intent": "SearchHotels",
+      "text": "what was your everyday job at microsoft",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "AirportCode",
-          "startPos": 3,
-          "endPos": 3
+          "entity": "Company",
+          "startPos": 30,
+          "endPos": 38
         }
       ]
     },
     {
-      "text": "find hotels around eze airport",
-      "intent": "SearchHotels",
+      "text": "what did you do in the two months at microsoft",
+      "intent": "WhatDidYouDo",
       "entities": [
         {
-          "entity": "AirportCode",
-          "startPos": 3,
-          "endPos": 3
+          "entity": "Company",
+          "startPos": 37,
+          "endPos": 45
+        }
+      ]
+    },
+    {
+      "text": "what did you work on at microsoft",
+      "intent": "WhatDidYouDo",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 24,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "what were your works at microsoft",
+      "intent": "WhatDidYouDo",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 24,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "can you share some projects you did at microsoft",
+      "intent": "WhatDidYouDo",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 39,
+          "endPos": 47
+        }
+      ]
+    },
+    {
+      "text": "learn anything new at microsoft?",
+      "intent": "WhatDidYouLearn",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 22,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "learn what at microsoft?",
+      "intent": "WhatDidYouLearn",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 14,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "what have you learned at microsoft",
+      "intent": "WhatDidYouLearn",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 25,
+          "endPos": 33
+        }
+      ]
+    },
+    {
+      "text": "what have you been doing in microsoft",
+      "intent": "WhatDidYouDo",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 28,
+          "endPos": 36
+        }
+      ]
+    },
+    {
+      "text": "what did you do for projectable",
+      "intent": "WhatDidYouDo",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 20,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "what did you learn from hku",
+      "intent": "WhatDidYouLearn",
+      "entities": [
+        {
+          "entity": "Company",
+          "startPos": 24,
+          "endPos": 26
         }
       ]
     }
