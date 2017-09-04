@@ -21,7 +21,12 @@ class LUISWrap extends Component {
         // fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${this.state.query}`)
         //     .then(res => res.json())
         //     .then(json => {
-        //         this.setState({ intent: JSON.parse(json).topScoringIntent.intent });
+        //         const resource = JSON.parse(json);
+
+        //         this.setState({
+        //             intent: resource.topScoringIntent.intent,
+        //             company: resource.entities[0].entity
+        //         });
         //     })
         //     .then(() => {
         //         console.log(this.state.intent);
