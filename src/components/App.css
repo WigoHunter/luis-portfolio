@@ -24,6 +24,7 @@
   --yellow: #F1C40F;
   --green: #1EE494;
   --lightBlue: #3FD1CB;
+  --darkBlue: #24344B;
 }
 
 body {
@@ -238,9 +239,9 @@ body {
 
         & i {
           color: var(--white);
-          font-size: 28px;
-          width: 48px;
-          height: 48px;
+          font-size: 24px;
+          width: 46px;
+          height: 46px;
           border: 1px solid color(var(--white) a(0.6));
           border-radius: 50%;
           display: inline-flex;
@@ -259,6 +260,67 @@ body {
     }
   }
 }
+
+.toggle {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  top: 40px;
+  left: calc(50% - 512px);
+  z-index: 1000;
+  border: 1px solid color(var(--white) a(0.6));
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--white);
+
+    & span {
+      background: var(--green);
+    }
+  }
+
+  & span {
+    height: 2px;
+    width: 26px;
+    background: color(var(--white) a(0.6));
+    position: absolute;
+    top: 7px;
+    transition: all 0.3s ease;
+
+    &:nth-child(2) {
+      top: 14px;
+    }
+
+    &:nth-child(3) {
+      top: 21px;
+    }
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: -340px;
+  height: 100vh;
+  width: 340px;
+  background: var(--darkBlue);
+  z-index: 100;
+  
+  & li {
+    color: var(--white);
+  }
+}
+
+/*
+body {
+  transform: translateX(340px);
+}
+*/
 
 /*
 .luis-wrap input[type='text'] {

@@ -8,7 +8,6 @@ class LUISWrap extends Component {
         super(props);
 
         this.state = {
-            openChat: false,
             typing: false,
             query: "",
             intent: "",
@@ -17,35 +16,15 @@ class LUISWrap extends Component {
             dotdotdot: "",
         };
 
-        this.toggleChat = this.toggleChat.bind(this);
         this.submitLUISQuery = this.submitLUISQuery.bind(this);
     }
 
     componentDidMount() {
         this.scrollToBottom();
-        // fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${this.state.query}`)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //         const resource = JSON.parse(json);
-
-        //         this.setState({
-        //             intent: resource.topScoringIntent.intent,
-        //             company: resource.entities[0].entity
-        //         });
-        //     })
-        //     .then(() => {
-        //         console.log(this.state.intent);
-        //     });
     }
 
     componentDidUpdate() {
         this.scrollToBottom();
-    }
-
-    toggleChat() {
-        this.setState({
-            openChat: !this.state.openChat
-        });
     }
 
     submitLUISQuery(e) {
@@ -102,13 +81,13 @@ class LUISWrap extends Component {
     }
 
     render() {
-        const { intents, children } = this.props;
-        const { openChat, typing, chatHistory, dotdotdot } = this.state;
+        const { intents, openChat, toggleChat, children } = this.props;
+        const { typing, chatHistory, dotdotdot } = this.state;
 
         return (
             <div className="luis-wrap">
                 <div className={`luis-chat ${openChat && "open"}`}>
-                    <h2 onClick={() => this.toggleChat()}>
+                    <h2 onClick={() => toggleChat()}>
                         <span className="green-dot"></span>
                         Mr. ChatWeb
                         <span className={`close ${openChat && "x"}`}>＋</span>
