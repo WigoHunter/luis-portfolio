@@ -4,7 +4,7 @@ import './App.css';
 import LUISWrap from './LUISWrap.js';
 import LUISComponent from './LUISComponent.js';
 import Header from './Header.js';
-import Navbar from './Nav.js';
+import Menu from './Menu.js';
 import Image from './Image.js';
 
 class App extends Component {
@@ -15,11 +15,11 @@ class App extends Component {
       intent: "default",
       company: "",
       openChat: false,
-      openNav: false,
+      openMenu: false,
     }
 
     this.toggleChat = this.toggleChat.bind(this);
-    this.toggleNav = this.toggleNav.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   setLUISState(states) {
@@ -32,27 +32,26 @@ class App extends Component {
     });
   }
 
-  toggleNav() {
+  toggleMenu() {
     this.setState({
-      openNav: !this.state.openNav
+      openMenu: !this.state.openMenu
     });
   }
 
   render() {
     return (
       <div className="App">
-        <div className="toggle" onClick={() => this.toggleNav()}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <Navbar list={[
+        {/*<Navbar list={[
             "Home",
             "Experiences",
             "Personal"
           ]}
           open={this.state.openNav}
           toggle={this.toggleNav}
+        />*/}
+        <Menu
+          open={this.state.openMenu}
+          toggleMenu={this.toggleMenu}
         />
         <Header
           backgrounds={[
@@ -62,6 +61,7 @@ class App extends Component {
             "/img4.JPG"
           ]}
           toggleChat={this.toggleChat}
+          openMenu={this.state.openMenu}
         />
         <LUISWrap
           luisUrl="https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query="
@@ -74,8 +74,9 @@ class App extends Component {
             <p>Feel free to ask it any question.</p>
             <p>It will respond with a new layout and contents that suit your interests.</p>
           </div>
+
           <div className="container me">
-            <h2>About me</h2>
+            <h2 className="sec-title">About me</h2>
             <h3>Beloved Family. Close Friends. Supportive Girlfriend.</h3>
             <div className="row">
               <Image src="/family.jpg" height="220px" width="320px"  />
@@ -87,7 +88,7 @@ class App extends Component {
             </p>
 
             <p>
-              Then I intiated a student project, <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank">Projectable</a>, to make University students in Hong Kong more connected in terms of project developments. For example, Business students can find partners in Computer Science to turn ideas into projects. Meanwhile, I have also been active in various developer communities in Hong Kong, including speaking at <a href="http://hk.sitcon.org/" target="_blank">SITCON HK</a> 2017 to share about React and Meteor, and organized <a href="http://ecjamming.tech/" target="_blank">E.C. Jamming</a>, one of the "<a href="http://get.tech/blog/10-mind-blowing-student-hackathons-from-around-the-world/" target="_blank">Top 10 Mind Blowing Student Hackathons From Around the World</a>", with sponsorships from Microsoft, GitHub, dotTech and local startups. The hackthon later led me to the amazing summer software engineer internship at Microsoft in 2017.
+              Then I intiated a student project, <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank">Projectable</a>, to make University students in Hong Kong more connected in terms of project developments. For example, Business students can find partners in Computer Science to turn ideas into projects. Meanwhile, I have also been active in various developer communities in Hong Kong, including speaking at <a href="http://hk.sitcon.org/" target="_blank">SITCON HK</a> 2017 to share about React and Meteor, and organized <a href="http://ecjamming.tech/" target="_blank">E.C. Jamming</a>, one of the "<a href="http://get.tech/blog/10-mind-blowing-student-hackathons-from-around-the-world/" target="_blank">Top 10 Mind Blowing Student Hackathons From Around the World</a>", with sponsorships from Microsoft, GitHub, dotTech and local startups. The hackthon later led me to the amazing summer software engineer internship at <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank">Microsoft</a> in 2017.
             </p>
 
             <p>
@@ -97,6 +98,13 @@ class App extends Component {
             <p>
               That is my long term vision. And for now, I am looking for opportunities in the US. I am currently applying for graduate programs in Computer Science or HCI in the States, and hopefully will join another competitive workplace in 2018 as an intern or a FTE after graduation.
             </p>
+          </div>
+
+          <div className="container experiences">
+            <h2 className="sec-title">Experiences</h2>
+            <div className="timeline">
+              
+            </div>
           </div>
         </LUISWrap>
       </div>

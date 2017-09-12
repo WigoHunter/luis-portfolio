@@ -65,15 +65,9 @@ class LUISWrap extends Component {
     }
 
     dotdotdot() {
-        if (this.state.dotdotdot.length === 3) {
-            this.setState({
-                dotdotdot: "",
-            });
-        } else {
-            this.setState({
-                dotdotdot: this.state.dotdotdot + "."
-            });
-        }
+        this.setState({
+            dotdotdot: this.state.dotdotdot.length === 3 ? "" : this.state.dotdotdot + "."
+        });
     }
 
     scrollToBottom() {

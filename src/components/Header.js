@@ -20,7 +20,7 @@ class Header extends Component {
   }
 
   render() {
-    const { backgrounds, toggleChat } = this.props;
+    const { backgrounds, toggleChat, openMenu } = this.props;
 
     return (
       <div
@@ -29,7 +29,7 @@ class Header extends Component {
           background: `url(${backgrounds[this.state.index]}) center center / cover`
         }}
       >
-        <div className="overlay"></div>
+        <div className={`overlay ${openMenu && "open"}`}></div>
         <div className="profile">
           <div className="pic" style={{ background: "url(/me.jpeg) center center / cover" }}></div>
           <h2>Kevin Hsu</h2>
