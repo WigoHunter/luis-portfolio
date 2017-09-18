@@ -22,6 +22,7 @@ class App extends Component {
       company: "",
       openChat: false,
       openMenu: false,
+      openChatWeb: false,
       projectFocused: false,
       // Use Redux for this part later
       projects: [{
@@ -52,6 +53,7 @@ class App extends Component {
 
     this.toggleChat = this.toggleChat.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.toggleChatWeb = this.toggleChatWeb.bind(this);
     this.setFocusOnProject = this.setFocusOnProject.bind(this);
     this.unSetFocusOnProject = this.unSetFocusOnProject.bind(this);
     this.chat = this.chat.bind(this);
@@ -70,6 +72,12 @@ class App extends Component {
   toggleMenu() {
     this.setState({
       openMenu: !this.state.openMenu
+    });
+  }
+
+  toggleChatWeb() {
+    this.setState({
+      openChatWeb: !this.state.openChatWeb
     });
   }
 
@@ -96,6 +104,7 @@ class App extends Component {
 
   chat(msg) {
     this.refs.luis.updateQuery(msg);
+    this.refs.luis.refs.query.focus();
 
     this.setState({
       openChat: true
@@ -258,7 +267,26 @@ class App extends Component {
               />
             </div>
 
-            <div className="more">Read More on My Medium Site</div>
+            <a className="more" href="https://medium.com/@kevin.wcb" target="_blank" rel="noopener noreferrer">
+              Read More <div>on My Medium Site</div>
+            </a>
+          </div>
+
+          <div className={`container chatweb ${this.state.openChatWeb && "open"}`}>
+            <div onClick={() => this.toggleChatWeb()}>
+              > What is <span className="highlight">ChatWeb</span>?<span className="cursor">|</span>
+            </div>
+          </div>
+
+          <div className="container footer">
+            <p className="title">Follow <span>Kevin</span> for more HCI experiments</p>
+            <div className="links">
+              <a href="https://medium.com/@kevin.wcb" rel="noopener noreferrer" target="_blank"><i className="fa fa-medium"></i></a>
+              <a href="https://www.linkedin.com/in/kai-chun-kevin-hsu-5428bbb4/" rel="noopener noreferrer" target="_blank"><i className="fa fa-linkedin"></i></a>
+              <a href="https://twitter.com/kevhs_pj" rel="noopener noreferrer" target="_blank"><i className="fa fa-twitter"></i></a>
+              <a href="https://github.com/WigoHunter" rel="noopener noreferrer" target="_blank"><i className="fa fa-github"></i></a>
+              <a href="https://www.facebook.com/kevinwigohsu" rel="noopener noreferrer" target="_blank"><i className="fa fa-facebook"></i></a>
+            </div>
           </div>
         </LUISWrap>
       </div>
