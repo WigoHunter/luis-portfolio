@@ -17,6 +17,8 @@ class LUISWrap extends Component {
         };
 
         this.submitLUISQuery = this.submitLUISQuery.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +31,7 @@ class LUISWrap extends Component {
 
     submitLUISQuery(e) {
         e.preventDefault();
+        let q = this.state.query;
         
         this.setState({
             chatHistory: this.state.chatHistory.concat([{
@@ -36,15 +39,14 @@ class LUISWrap extends Component {
                 from: "user"
             }]),
             typing: true,
-            query: ReactDOM.findDOMNode(this.refs.query).value,
+            query: "",
         }, () => {
-            ReactDOM.findDOMNode(this.refs.query).value = "";
             let interval = setInterval(() => {
                 this.dotdotdot();
             }, 600);
 
             setTimeout(() => {
-                fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${this.state.query}`)
+                fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${q}`)
                     .then(res => res.json())
                     .then(json => {
                         const resource = JSON.parse(json);
@@ -74,14 +76,29 @@ class LUISWrap extends Component {
         ReactDOM.findDOMNode(this.refs.chats).scrollTop = ReactDOM.findDOMNode(this.refs.chats).scrollHeight;
     }
 
+    updateQuery(query) {
+        this.setState({
+            query: query
+        });
+    }
+
+    typeQuery(e) {
+        this.updateQuery(e.target.value);
+    }
+
+    toggle() {
+        this.props.toggleChat();
+        this.refs.query.focus();
+    }
+
     render() {
-        const { intents, openChat, toggleChat, children } = this.props;
-        const { typing, chatHistory, dotdotdot } = this.state;
+        const { openChat, children } = this.props;
+        const { query, typing, chatHistory, dotdotdot } = this.state;
 
         return (
             <div className="luis-wrap">
                 <div className={`luis-chat ${openChat && "open"}`}>
-                    <h2 onClick={() => toggleChat()}>
+                    <h2 onClick={() => this.toggle()}>
                         <span className="green-dot"></span>
                         Mr. ChatWeb
                         <span className={`close ${openChat && "x"}`}>＋</span>
@@ -110,7 +127,7 @@ class LUISWrap extends Component {
                     </div>
 
                     <form onSubmit={e => this.submitLUISQuery(e)}>
-                        <input type="text" ref="query" />
+                        <input autoFocus type="text" ref="query" value={query} onChange={e => this.typeQuery(e)} />
                     </form>
                 </div>
 

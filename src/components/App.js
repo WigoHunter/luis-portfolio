@@ -2,24 +2,59 @@ import React, { Component } from 'react';
 import './App.css';
 
 import LUISWrap from './LUISWrap.js';
-import LUISComponent from './LUISComponent.js';
+// import LUISComponent from './LUISComponent.js';
 import Header from './Header.js';
 import Menu from './Menu.js';
 import Image from './Image.js';
+import Timeline, { TimelineItem } from './Timeline.js';
+import Project from './Project.js';
+import Blog from './Blog.js';
+
+import data from './db/data.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      query: "",
       intent: "default",
       company: "",
       openChat: false,
       openMenu: false,
+      projectFocused: false,
+      // Use Redux for this part later
+      projects: [{
+          name: "SITCON x HK",
+          title: "Speaker",
+          img: "./sitcon.jpeg",
+        }, {
+          name: "BingGC UX",
+          title: "Software Engineer Intern",
+          img: "./binggc.png",
+        }, {
+          name: "Projectable",
+          title: "Co-Founder",
+          img: "./pj.png",
+        }, {
+          name: "E.C. Jamming",
+          title: "Hackathon Organizor",
+          img: "./ecj.jpg",
+        }
+      ],
+      conversations: [
+        "How was your academic exchange at University of Toronto?",
+        "How did you spend your first summer?",
+        "What did you do in the AIESEC exchange to Budapest?",
+        "What is your next steps?"
+      ]
     }
 
     this.toggleChat = this.toggleChat.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.setFocusOnProject = this.setFocusOnProject.bind(this);
+    this.unSetFocusOnProject = this.unSetFocusOnProject.bind(this);
+    this.chat = this.chat.bind(this);
   }
 
   setLUISState(states) {
@@ -38,17 +73,38 @@ class App extends Component {
     });
   }
 
+  setFocusOnProject(name) {
+    let projectList = [];
+    
+    for (let i = 0; i < this.state.projects.length; i++) {
+      this.state.projects[i].name === name
+        ? projectList.unshift(this.state.projects[i])
+        : projectList.push(this.state.projects[i])
+    }
+
+    this.setState({
+      projects: projectList,
+      projectFocused: true
+    });
+  }
+
+  unSetFocusOnProject() {
+    this.setState({
+      projectFocused: false
+    });
+  }
+
+  chat(msg) {
+    this.refs.luis.updateQuery(msg);
+
+    this.setState({
+      openChat: true
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        {/*<Navbar list={[
-            "Home",
-            "Experiences",
-            "Personal"
-          ]}
-          open={this.state.openNav}
-          toggle={this.toggleNav}
-        />*/}
         <Menu
           open={this.state.openMenu}
           toggleMenu={this.toggleMenu}
@@ -68,6 +124,7 @@ class App extends Component {
           intents={["WhatDidYouDo", "WhatDidYouLearn"]}
           openChat={this.state.openChat}
           toggleChat={this.toggleChat}
+          ref="luis"
         >
           <div className="container reminder">
             <h2>Let me remind you once more. <span>You can really talk to this website.</span></h2>
@@ -89,11 +146,11 @@ class App extends Component {
             </p>
 
             <p>
-              I am always into the community side of Computer Science and currently lead a student project, <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank">Projectable</a>, to make University students in Hong Kong more connected in terms of project developments. Meanwhile, I have also been active in various developer communities in Hong Kong, including speaking at <a href="http://hk.sitcon.org/" target="_blank">SITCON HK</a> 2017 to share about React and Meteor, and organized <a href="http://ecjamming.tech/" target="_blank">E.C. Jamming</a>, one of the "<a href="http://get.tech/blog/10-mind-blowing-student-hackathons-from-around-the-world/" target="_blank">Top 10 Mind Blowing Student Hackathons From Around the World</a>", with sponsorships from Microsoft, GitHub, dotTech and local startups.
+              I am always into the community side of Computer Science and currently lead a student project, <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank" rel="noopener noreferrer">Projectable</a>, to make University students in Hong Kong more connected in terms of project developments. Meanwhile, I have also been active in various developer communities in Hong Kong, including speaking at <a href="http://hk.sitcon.org/" target="_blank" rel="noopener noreferrer">SITCON HK</a> 2017 to share about React and Meteor, and organized <a href="http://ecjamming.tech/" target="_blank" rel="noopener noreferrer">E.C. Jamming</a>, one of the "<a href="http://get.tech/blog/10-mind-blowing-student-hackathons-from-around-the-world/" target="_blank" rel="noopener noreferrer">Top 10 Mind Blowing Student Hackathons From Around the World</a>", with sponsorships from Microsoft, GitHub, dotTech and local startups.
             </p>
 
             <p>
-              The hackathon later led me to the amazing summer software engineer internship at <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank">Microsoft</a> in 2017.
+              The hackathon later led me to the amazing summer software engineer internship at <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">Microsoft</a> in 2017.
             </p>
 
             <p>
@@ -103,118 +160,72 @@ class App extends Component {
 
           <div className="container experiences">
             <h2 className="sec-title">Experiences</h2>
-            <div className="timeline">
-              <div className="exp">
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="content">
-                  <Image src="/ms-logo.png" height="20px" width="90px" />
-                  <h3>Software Engineer Intern</h3>
-                  <p className="time">Jun - Sep / 2017</p>
-                  <p className="info">
-                    Developed a multi-threading internal application for the Geocoding team to parse and visualize geocoding data for more efficient debugging, testing and benchmarking.
-                  </p>
-                  {/*<ul>
-                    <li>C#</li>
-                    <li>JavaScript</li>
-                    <li>Asp.Net</li>
-                  </ul>*/}
-                </div>
-              </div>
+            <Timeline>
+              <TimelineItem
+                title="Software Engineer Intern"
+                time="Jun - Sep / 2017"
+                intro="Developed a multi-threading internal application for the Geocoding team to parse and visualize geocoding data for more efficient debugging, testing and benchmarking."
+                company={{
+                  logo: "/ms-logo.png"
+                }}
+              />
 
-              <div className="exp">
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="content">
-                  <h3>Co-Founder & Full-Stack Developer</h3>
-                  <p className="company">@ <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank">Projectable.hk</a> <span>(private beta)</span></p>
-                  <p className="time">Sep / 2016 - Now</p>
-                  <p className="info">
-                    Leading a team of developers and a designer working on a talent marketplace for University students to team up on projects, using React and Meteor.  
-                  </p>
-                </div>
-              </div>
+              <TimelineItem
+                title="Co-Founder & Full-Stack Developer"
+                time="Sep / 2016 - Now"
+                intro="Leading a team of developers and a designer working on a talent marketplace for University students to team up on projects, using React and Meteor."
+                company={{
+                  name: "Projectable.hk",
+                  link: "http://projectable.hk/profile/id/kevin-hsu",
+                  beta: true
+                }}
+              />
 
-              <div className="exp">
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="content">
-                  <h3>Hackathon Organizor</h3>
-                  <p className="company">@ <a href="http://ecjamming.tech/" target="_blank">ECJamming.tech</a></p>
-                  <p className="time">Jan - Mar / 2017</p>
-                  <p className="info">
-                    Initiated and organized a student hackathon in Hong Kong and acquired sponsorships from Microsoft, GitHub, Make School, dotTech and local startup communities.
-                  </p>
-                </div>
-              </div>
+              <TimelineItem
+                title="Hackathon Organizor"
+                time="Jan - Mar / 2017"
+                intro="Initiated and organized a student hackathon in Hong Kong and acquired sponsorships from Microsoft, GitHub, Make School, dotTech and local startup communities."
+                company={{
+                  name: "ECJamming.tech",
+                  link: "http://ecjamming.tech/"
+                }}
+              />
 
-              <div className="exp">
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="content">
-                  <h3>Frontend Developer Intern</h3>
-                  <p className="company">@ <a href="https://25sprout.com/" target="_blank">25Sprout</a></p>
-                  <p className="time">Jul - Aug / 2016</p>
-                  <p className="info">
-                    Worked at the award-winning startup, 25sprout, developing E-Commerce websites using cutting edge technologies including React, Redux, ES6, Webpack, etc.
-                  </p>
-                </div>
-              </div> 
-            </div>
+              <TimelineItem
+                title="Frontend Developer Intern"
+                time="Jul - Aug / 2016"
+                intro="Worked at the award-winning startup, 25sprout, developing E-Commerce websites using cutting edge technologies including React, Redux, ES6, Webpack, etc."
+                company={{
+                  name: "25Sprout",
+                  link: "https://25sprout.com/"
+                }}
+              />
+            </Timeline>
           </div>
 
           <div className="container projects">
             <h2 className="sec-title">Projects</h2>
-            <div className="row">
-              <div className="block">
-                <div className="content">
-                  <div className="info">
-                    <h3>SITCON x HK</h3>
-                    <p className="title">Speaker</p>
-                    <p className="more">Show Me More</p>
-                  </div>
-                  <img src="./sitcon.jpeg" />
-                </div>
-              </div>
-              <div className="block">
-                <div className="content">
-                  <div className="info">
-                    <h3>BingGC UX</h3>
-                    <p className="title">Software Engineer Intern</p>
-                    <p className="more">Show Me More</p>
-                  </div>
-                  <img src="./binggc.png" />
-                </div>
-              </div>
-              <div className="block">
-                <div className="content">
-                  <div className="info">
-                    <h3>Projectable</h3>
-                    <p className="title">Co-Founder</p>
-                    <p className="more">Show Me More</p>
-                  </div>
-                  <img src="./pj.png" />
-                </div>
-              </div>
-              <div className="block">
-                <div className="content">
-                  <div className="info">
-                    <h3>E.C. Jamming</h3>
-                    <p className="title">Hackathon Organizor</p>
-                    <p className="more">Show Me More</p>
-                  </div>
-                  <img src="./ecj.jpg" />
-                </div>
-              </div>
+            <div className={`row ${this.state.projectFocused && "focus"}`}>
+              {this.state.projects.map((project, i) => (
+                <Project
+                  key={i}
+                  name={project.name}
+                  title={project.title}
+                  img={project.img}
+                  onClickMore={this.setFocusOnProject}
+                  unset={this.unSetFocusOnProject}
+                />
+              ))}
             </div>
 
-            <div className="row">
-              <p>... Interested in something else? <span>Why not talk to Mr. ChatWeb</span></p>
+            <div className="row conversations">
+              <h3>... Interested in something else? <span>Why not talk to Mr. ChatWeb!</span></h3>
               <ul>
-                <li>How was your academic exchange at University of Toronto?</li>
-                <li>How did you spend your first summer?</li>
-                <li>What did you do in the AIESEC exchange to Budapest?</li>
-                <li>What is your next steps?</li>
+                {this.state.conversations.map((msg, i) => (
+                  <li key={i} onClick={() => this.chat(msg)}>
+                    {msg}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -222,6 +233,32 @@ class App extends Component {
           <div className="container blogs">
             <h2 className="sec-title">Blogs</h2>
             <h3 className="following">Really treats blogging seriously. I love writing and sharing.</h3>
+            <div className="row">
+              <Blog
+                link="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816"
+                pic="/sky.jpeg"
+                title="Thank you, Microsoft, for the amazing Software Engineer Internship"
+                time="Aug 31 / 2017"
+                featured
+              />
+
+              <Blog
+                link="https://hackernoon.com/chatweb-build-websites-that-understand-users-with-full-free-microsoft-stack-dc07ce18b19d"
+                pic="/coding.jpeg"
+                title="ChatWeb: Build Websites that understand users with full (free) Microsoft Stack"
+                time="Aug 28 / 2017"
+                featured
+              />
+
+              <Blog
+                link="https://medium.com/@kevin.wcb/from-a-business-startup-kid-to-a-software-engineer-intern-at-microsoft-48b610e74d16"
+                pic="/ms.png"
+                title="From a Business/Startup Kid to a Software Engineer Intern with Microsoft Taiwan"
+                time="Jul 18 / 2017"
+              />
+            </div>
+
+            <div className="more">Read More on My Medium Site</div>
           </div>
         </LUISWrap>
       </div>

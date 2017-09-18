@@ -1,0 +1,19 @@
+{
+    "data": [{
+        "name": "SITCON x HK",
+        "title": "Speaker",
+        "img": "./sitcon.jpeg"
+    }, {
+        "name": "BingGC UX",
+        "title": "Software Engineer Intern",
+        "img": "./binggc.png"
+    }, {
+        "name": "Projectable",
+        "title": "Co-Founder",
+        "img": "./pj.png"
+    }, {
+        "name": "E.C. Jamming",
+        "title": "Hackathon Organizor",
+        "img": "./ecj.jpg"
+    }]
+}

@@ -90,6 +90,7 @@ body {
       background: #DDD;
       padding: 0 14px 0 10px;
       border-bottom: 1px solid rgba(0,0,0,.2);
+      cursor: pointer;
 
       & .green-dot {
         width: 10px;
@@ -759,6 +760,50 @@ body {
       flex-wrap: wrap;
       width: 800px;
 
+      &.focus {
+        justify-content: space-around;
+
+        & .block:not(:first-child) {
+          width: 30%;
+          height: 200px;
+
+          & .info {
+
+            & h3 {
+              font-size: 16px;
+            }
+
+            & .title {
+              font-size: 14px;
+            }
+
+            & .more {
+              font-size: 12px;
+              margin-top: 40px;
+              padding: 3px 5px;
+            }
+          }
+        }
+
+        & .block:first-child {
+          width: 800px;
+          height: 380px;
+
+          & .unset {
+            display: block;
+          }
+
+          & .content .info {
+            top: 0;
+            opacity: 1;
+
+            & .more {
+              display: none;
+            }
+          }
+        }
+      }
+
       & .block {
         width: 380px;
         height: 290px;
@@ -771,21 +816,34 @@ body {
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        transition: all 0.6s ease;
+
+        & .unset {
+          position: absolute;
+          top: 15px;
+          right: 20px;
+          font-size: 20px;
+          transform: rotate(45deg);
+          cursor: pointer;
+          z-index: 100;
+          color: var(--white);
+          display: none;
+        }
 
         &:first-child {
-          background: linear-gradient(135deg, #fa001d, #D7AA88);
+          background: linear-gradient(135deg, color(#fa001d a(0.4)), color(#D7AA88 a(0.7)));
         }
 
         &:nth-child(2) {
-          background: linear-gradient(135deg, var(--green), #ACC7F2);
+          background: linear-gradient(135deg, color(var(--green) a(0.8)), color(#ACC7F2 a(0.9)));
         }
 
         &:nth-child(3) {
-          background: linear-gradient(135deg, var(--lightBlue), #3498DB);
+          background: linear-gradient(135deg, color(var(--lightBlue) a(0.9)), color(#3498DB a(0.9)));
         }
 
         &:nth-child(4) {
-          background: linear-gradient(135deg, #EDDC15, var(--yellow));
+          background: linear-gradient(135deg, color(#EDDC15 a(0.6)), color(var(--yellow) a(0.6)));
         }
 
         & .content {
@@ -859,15 +917,168 @@ body {
         }
       }
     }
+
+    & .conversations {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & h3 {
+        font-size: 20px;
+        margin: 20px 0;
+
+        & span {
+          color: var(--green);
+        }
+      }
+
+      & ul {
+        padding: 0;
+
+        & li {
+          list-style: none;
+          background: var(--green);
+          margin: 20px 0 40px;
+          padding: 15px 18px;
+          width: 400px;
+          border-radius: 8px;
+          position: relative;
+          transition: all 0.6s ease;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-top: solid 15px var(--green);
+            border-left: solid 15px #FFF;
+            border-bottom: solid 15px #FFF;
+            border-right: solid 15px #FFF;
+          }
+        }
+      }
+    }
   }
 
   &.blogs {
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
 
     & h3.following {
       color: var(--darkBlue);
       margin: 40px 0 10px;
+    }
+
+    & .row {
+      width: 800px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      & .blog {
+        height: 360px;
+        width: 250px;
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        border-radius: 4px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: all 0.3 ease;
+        color: inherit;
+        position: relative;
+
+        &:hover {
+          opacity: 0.8;
+          box-shadow: 0 0 8px 0 rgba(0, 0, 0, .3);
+
+          & .pic-area .pic {
+            transform: scale(1.1);
+          }
+        }
+
+        & .pic-area {
+          width: 100%;
+          height: 200px;
+          position: relative;
+          overflow: hidden;
+          
+          & .pic {
+            height: 100%;
+            width: 100%;
+            transition: all 0.6s ease;
+          }
+        }
+
+        & .content {
+          box-sizing: border-box;
+          padding: 8px 12px;
+
+          & h4 {
+            margin: 10px 0;
+            color: var(--primary);
+          }
+
+          & p.time {
+            font-size: 14px;
+            opacity: 0.4;
+          }
+
+          & p.feature {
+            position: absolute;
+            top: 185px;
+            left: 20px;
+
+            & img {
+              height: 30px;
+              border-radius: 50%;
+            }
+
+            &:hover .info {
+              opacity: 1;
+            }
+
+            & .info {
+              display: block;
+              background: var(--green);
+              color: var(--black);
+              position: relative;
+              right: 0px;
+              top: -75px;
+              padding: 3px 6px;
+              font-size: 13px;
+              opacity: 0;
+              transition: all 0.3s ease;
+
+              &::before {
+                content: '';
+                position: absolute;
+                width: 0px;
+                height: 0px;
+                border-top: 8px solid var(--green);
+                border-left: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 8px solid transparent;
+                bottom: -16px;
+                left: 9px;
+                z-index: 1000;
+              }
+            }
+
+            &:hover .info {
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 }
