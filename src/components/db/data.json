@@ -2,7 +2,8 @@
     "data": [{
         "name": "SITCON x HK",
         "title": "Speaker",
-        "img": "./sitcon.jpeg"
+        "img": "./sitcon.jpeg",
+        "child": "<div className=\"iframe\"><iframe title=\"sitcon\" width=\"360\" height=\"186\" src=\"https://www.youtube.com/embed/auNTp1lc2ZE?start=17434\" allowfullscreen></iframe></div>"
     }, {
         "name": "BingGC UX",
         "title": "Software Engineer Intern",

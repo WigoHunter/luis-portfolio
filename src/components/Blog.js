@@ -9,7 +9,7 @@ const Blog = ({ link, pic, title, time, featured }) => (
             <h4>{title}</h4>
             <p className="time">{time}</p>
             {featured &&
-                <p className="feature"><img src="./hn.jpg" alt="hackernoon" /><div className="info">Featured in HackerNoon</div></p>
+                <p className="feature"><img src="./hn.jpg" alt="hackernoon" /><div className="info">Featured on HackerNoon</div></p>
             }
         </div>
     </a>

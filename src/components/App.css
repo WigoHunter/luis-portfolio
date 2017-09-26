@@ -24,6 +24,16 @@
   }
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes fade {
   0% {
     opacity: 1;
@@ -54,6 +64,7 @@
   --green: #1EE494;
   --lightBlue: #3FD1CB;
   --darkBlue: #24344B;
+  --black: black;
 }
 
 body {
@@ -750,6 +761,24 @@ body {
     }
   }
 
+  & .skill {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & p {
+      color: var(--white);
+      font-size: 16px;
+    }
+
+    & .bar {
+      height: 20px;
+      background: color(var(--green) a(0.8));
+      margin: 10px 0 15px;
+      border-top-right-radius: 10px;
+    }
+  }
+
   &.projects {
     align-items: center;
     margin-top: 40px;
@@ -764,6 +793,53 @@ body {
       flex-direction: row;
       flex-wrap: wrap;
       width: 800px;
+
+      & .child {
+        margin-top: 20px;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & .columns {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+          & .left {
+            min-height: 200px;
+            width: 50%;
+          }
+
+          & .right {
+            min-height: 200px;
+            width: 50%;
+          }
+        }
+
+        & .binggc .right {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          & p {
+            color: var(--white);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0 10px;
+
+            & a {
+              color: var(--green);
+              text-decoration: none;
+              transition: all 0.3s ease;
+
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
 
       &.focus {
         justify-content: space-around;
@@ -1125,12 +1201,84 @@ body {
     background: linear-gradient(-45deg, #E73C7E, var(--green), var(--primary));
     background-size: 400% 400%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: all 0.6s ease;
+    box-sizing: border-box;
+    padding: 40px 0;
 
     &.open {
       height: 700px;
+
+      & > div.title {
+        font-size: 24px;
+        margin-bottom: -10px;
+
+        & .highlight {
+          font-size: 28px;
+        }
+      }
+
+      & .content {
+        display: flex;
+        animation: appear 0.6s ease 1 forwards;
+        animation-delay: 0.3s;
+        flex-direction: column;
+        align-items: center;
+
+        & .sub {
+          font-size: 14px;
+          letter-spacing: 2px;
+          color: color(var(--white) a(0.8));
+        }
+
+        & .paragraph {
+          font-size: 16px;
+          line-height: 1.6;
+          width: 800px;
+          margin-top: 16px;
+          text-align: center;
+
+          & > span {
+            color: var(--blue);
+          }
+        }
+
+        & ul {
+          margin: 0;
+          margin-top: 16px;
+          padding: 0;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          width: 800px;
+
+          & li {
+            list-style: none;
+            font-size: 14px;
+            border: 1px solid color(var(--white) a(0.7));
+            margin: 15px 10px 0;
+            padding: 5px 10px;
+            border-radius: 100px;
+            background: color(var(--white) a(0.4));
+            color: var(--blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: scale(1.1);
+              background: color(var(--white) a(0.8));
+            }
+          }
+        }
+      }
+    }
+
+    & .content {
+      display: none;
+      opacity: 0;
     }
 
     & .cursor {
@@ -1145,7 +1293,7 @@ body {
 
     &:hover {
 
-      & > div {
+      & > div.title {
         font-size: 24px;
         cursor: pointer;
 
@@ -1180,7 +1328,7 @@ body {
     & > div {
       color: var(--white);
       font-size: 18px;
-      position: absolute;
+      position: relative;
       padding: 10px 15px;
       transition: all 0.6s ease;
 

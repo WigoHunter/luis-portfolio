@@ -19,6 +19,7 @@ class LUISWrap extends Component {
         this.submitLUISQuery = this.submitLUISQuery.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.luis = this.luis.bind(this);
     }
 
     componentDidMount() {
@@ -50,19 +51,24 @@ class LUISWrap extends Component {
                     .then(res => res.json())
                     .then(json => {
                         const resource = JSON.parse(json);
-
+                        this.props.dispatch(resource);
                         this.setState({
-                            intent: resource.topScoringIntent.intent,
-                            company: resource.entities.length ? resource.entities[0].entity : "",
                             typing: false,
-                            dotdotdot: "",
-                            chatHistory: this.state.chatHistory.concat([{
-                                message: `You are asking ${resource.topScoringIntent.intent} about ${resource.entities.length ? resource.entities[0].entity : ""}`,
-                                from: "LUIS",
-                            }])
-                        });
+                            dotdotdot: ""
+                        });                    
                     });
             }, 600);
+        });
+    }
+
+    luis(msg) {
+        this.setState({
+            typing: false,
+            dotdotdot: "",
+            chatHistory: this.state.chatHistory.concat([{
+                message: msg,
+                from: "LUIS",
+            }])
         });
     }
 

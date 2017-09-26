@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import scrollIntoView from 'scroll-into-view';
 import './App.css';
 
 import LUISWrap from './LUISWrap.js';
 // import LUISComponent from './LUISComponent.js';
 import Header from './Header.js';
 import Menu from './Menu.js';
-import Image from './Image.js';
+import About from './About.js';
 import Timeline, { TimelineItem } from './Timeline.js';
 import Project from './Project.js';
 import Blog from './Blog.js';
+import Skill from './Skill.js';
 
 import data from './db/data.json';
 
@@ -25,27 +28,63 @@ class App extends Component {
       openChatWeb: false,
       projectFocused: false,
       // Use Redux for this part later
+      // projects: data.data,
       projects: [{
-          name: "SITCON x HK",
-          title: "Speaker",
-          img: "./sitcon.jpeg",
-        }, {
-          name: "BingGC UX",
-          title: "Software Engineer Intern",
-          img: "./binggc.png",
-        }, {
-          name: "Projectable",
-          title: "Co-Founder",
-          img: "./pj.png",
-        }, {
-          name: "E.C. Jamming",
-          title: "Hackathon Organizor",
-          img: "./ecj.jpg",
-        }
-      ],
+          "name": "SITCON x HK",
+          "title": "Speaker",
+          "img": "./sitcon.jpeg",
+          "child": 
+            <div className="iframe">
+              <iframe title="sitcon" width="360" height="186" src="https://www.youtube.com/embed/auNTp1lc2ZE?start=17434" allowfullscreen></iframe>
+            </div>
+      }, {
+          "name": "BingGC UX",
+          "title": "Software Engineer Intern",
+          "img": "./binggc.png",
+          "child": 
+            <div className="binggc columns">
+              <div className="left">
+                <Skill skill="C#" bar="60%" />
+                <Skill skill="JavaScript" bar="80%" />
+                <Skill skill="HTML5 Web Worker" bar="70%" />
+              </div>
+
+              <div className="right">
+                <p>
+                  At Microsoft, I was working with the Bing Geocoding Team to build an internal debugging tool, BingGC UX, using Multi-threading C# and asynchronous JavaScript programs to handle and visualize hundreds of thousands of geocoding data.
+                </p>
+
+                <p>Read <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">full story</a>.</p>
+              </div>
+            </div>
+      }, {
+          "name": "Projectable",
+          "title": "Co-Founder",
+          "img": "./pj.png",
+          "child": 
+            <div className="pj columns">
+              <div className="left">
+                <Skill skill="React JS" bar="80%" />
+                <Skill skill="Meteor JS" bar="70%" />
+                <Skill skill="Chatbot" bar="65%" />
+              </div>
+
+              <div className="right">
+                <p>
+                  At Microsoft, I was working with the Bing Geocoding Team to build an internal debugging tool, BingGC UX, using Multi-threading C# and asynchronous JavaScript programs to handle and visualize hundreds of thousands of geocoding data.
+                </p>
+
+                <p>Read <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">full story</a>.</p>
+              </div>
+            </div>
+      }, {
+          "name": "E.C. Jamming",
+          "title": "Hackathon Organizor",
+          "img": "./ecj.jpg"
+      }],
       conversations: [
         "How was your academic exchange at University of Toronto?",
-        "How did you spend your first summer?",
+        "What is ChatWeb?",
         "What did you do in the AIESEC exchange to Budapest?",
         "What is your next steps?"
       ]
@@ -57,10 +96,9 @@ class App extends Component {
     this.setFocusOnProject = this.setFocusOnProject.bind(this);
     this.unSetFocusOnProject = this.unSetFocusOnProject.bind(this);
     this.chat = this.chat.bind(this);
-  }
-
-  setLUISState(states) {
-    this.setState(states);
+    this.setAppState = this.setAppState.bind(this);
+    this.scrollTo = this.scrollTo.bind(this);
+    this.dispatch = this.dispatch.bind(this);
   }
 
   toggleChat() {
@@ -111,12 +149,43 @@ class App extends Component {
     });
   }
 
+  // Replace this with Redux Store
+  setAppState(state) {
+    this.setState(state);
+  }
+
+  scrollTo(target) {
+    const node = ReactDOM.findDOMNode(this.refs[target]);
+
+    scrollIntoView(node, {
+      time: 600,
+    });
+  }
+
+  dispatch(req) {
+    console.log(req);
+
+    switch(req.topScoringIntent.intent) {
+      case "WhatIsChatWeb":
+        this.scrollTo("chatweb");
+        this.toggleChatWeb();
+        this.refs.luis.luis("Here you go! Any further questions?");
+        break;
+      case "greet":
+        this.refs.luis.luis("Hi! How are you doing!");
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <Menu
           open={this.state.openMenu}
           toggleMenu={this.toggleMenu}
+          scrollTo={this.scrollTo}
         />
         <Header
           backgrounds={[
@@ -133,6 +202,8 @@ class App extends Component {
           intents={["WhatDidYouDo", "WhatDidYouLearn"]}
           openChat={this.state.openChat}
           toggleChat={this.toggleChat}
+          setAppState={this.setAppState}
+          dispatch={this.dispatch}
           ref="luis"
         >
           <div className="container reminder">
@@ -141,33 +212,9 @@ class App extends Component {
             <p>It will respond with a new layout and contents that suit your interests.</p>
           </div>
 
-          <div className="container me">
-            <h2 className="sec-title">About me</h2>
-            <h3>Beloved Family. Close Friends. Supportive Girlfriend.</h3>
-            <div className="row">
-              <Image src="/family.jpg" height="220px" width="320px"  />
-              <Image src="/friends.jpg" height="220px" width="320px" />
-              <Image src="/gf.jpg" height="220px" width="320px" />
-            </div>
+          <About ref="about" />
 
-            <p>
-              I am Kevin from Taiwan, currently a Final Year student at the University of Hong Kong with double majors in Computer Science and Business. 
-            </p>
-
-            <p>
-              I am always into the community side of Computer Science and currently lead a student project, <a href="http://projectable.hk/profile/id/kevin-hsu" target="_blank" rel="noopener noreferrer">Projectable</a>, to make University students in Hong Kong more connected in terms of project developments. Meanwhile, I have also been active in various developer communities in Hong Kong, including speaking at <a href="http://hk.sitcon.org/" target="_blank" rel="noopener noreferrer">SITCON HK</a> 2017 to share about React and Meteor, and organized <a href="http://ecjamming.tech/" target="_blank" rel="noopener noreferrer">E.C. Jamming</a>, one of the "<a href="http://get.tech/blog/10-mind-blowing-student-hackathons-from-around-the-world/" target="_blank" rel="noopener noreferrer">Top 10 Mind Blowing Student Hackathons From Around the World</a>", with sponsorships from Microsoft, GitHub, dotTech and local startups.
-            </p>
-
-            <p>
-              The hackathon later led me to the amazing summer software engineer internship at <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">Microsoft</a> in 2017.
-            </p>
-
-            <p>
-              I am looking for opportunities in the US. I am currently applying for graduate programs in Computer Science or HCI in the States and hopefully will join another competitive workplace in 2018 as an intern or an FTE after graduation.
-            </p>
-          </div>
-
-          <div className="container experiences">
+          <div className="container experiences" ref="experiences">
             <h2 className="sec-title">Experiences</h2>
             <Timeline>
               <TimelineItem
@@ -212,7 +259,7 @@ class App extends Component {
             </Timeline>
           </div>
 
-          <div className="container projects">
+          <div className="container projects" ref="projects">
             <h2 className="sec-title">Projects</h2>
             <div className={`row ${this.state.projectFocused && "focus"}`}>
               {this.state.projects.map((project, i) => (
@@ -223,6 +270,8 @@ class App extends Component {
                   img={project.img}
                   onClickMore={this.setFocusOnProject}
                   unset={this.unSetFocusOnProject}
+                  child={(this.state.projectFocused && i === 0) && <div className="child">{project.child}</div>}
+                  // child={(this.state.projectFocused && i === 0) && <div className="child" dangerouslySetInnerHTML={{ __html: project.child }} />}
                 />
               ))}
             </div>
@@ -239,7 +288,7 @@ class App extends Component {
             </div>
           </div>
 
-          <div className="container blogs">
+          <div className="container blogs" ref="blogs">
             <h2 className="sec-title">Blogs</h2>
             <h3 className="following">Really treats blogging seriously. I love writing and sharing.</h3>
             <div className="row">
@@ -272,14 +321,30 @@ class App extends Component {
             </a>
           </div>
 
-          <div className={`container chatweb ${this.state.openChatWeb && "open"}`}>
-            <div onClick={() => this.toggleChatWeb()}>
+          <div className={`container chatweb ${this.state.openChatWeb && "open"}`} ref="chatweb">
+            <div className="title" onClick={() => this.toggleChatWeb()}>
               > What is <span className="highlight">ChatWeb</span>?<span className="cursor">|</span>
             </div>
-          </div>
 
+            <div className="content">
+              <p className="sub">Enriched Human-Web Interaction inspired by <span>Chatbots</span></p>
+
+              <p className="paragraph">
+                ChatWeb uses the same NLP implementations as Chatbot to understand user intents from literal messages. However, instead of returning another message back to the users, ChatWeb would re-render itself and simultaneously provide customized contents and layouts according to the user intents.
+              </p>
+
+              <ul>
+                <li onClick={() => this.chat('What do you mean by "Cleaner default layout"')}>Cleaner Default Layout</li>
+                <li onClick={() => this.chat('What do you mean by "Interactivity"?')}>Interactivity on Web</li>
+                <li onClick={() => this.chat('What interations do chatbots not have?')}>Richer Interactions than Chatbots</li>
+                <li onClick={() => this.chat('What "New way to navigate"')}>New way to navigate</li>
+                <li onClick={() => this.chat('"Extend" to what?')}>Extendablitity</li>
+              </ul>
+            </div>
+          </div>
+          
           <div className="container footer">
-            <p className="title">Follow <span>Kevin</span> for more HCI experiments</p>
+            <p className="title">Follow <span>Kevin</span> for more stories</p>
             <div className="links">
               <a href="https://medium.com/@kevin.wcb" rel="noopener noreferrer" target="_blank"><i className="fa fa-medium"></i></a>
               <a href="https://www.linkedin.com/in/kai-chun-kevin-hsu-5428bbb4/" rel="noopener noreferrer" target="_blank"><i className="fa fa-linkedin"></i></a>
