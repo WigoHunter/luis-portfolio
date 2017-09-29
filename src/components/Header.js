@@ -10,9 +10,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    window.clearInterval();
-
-    let interval = setInterval(() => {
+    setInterval(() => {
       this.setState({
         index: this.state.index === 3 ? 0 : this.state.index + 1
       });
@@ -33,7 +31,6 @@ class Header extends Component {
         <div className="profile">
           <div className="pic" style={{ background: "url(/me.jpeg) center center / cover" }}></div>
           <h2>Kevin Hsu</h2>
-          {/*<h4>Software Engineer Intern at <span>Microsoft</span> | Final Year Student at <span>HKU</span></h4>*/}
           <p className="subtitle">Software Engineer | Tech Blogger | Student</p>
           <div className="line"></div>
           <p>

@@ -13,7 +13,7 @@ import Project from './Project.js';
 import Blog from './Blog.js';
 import Skill from './Skill.js';
 
-import data from './db/data.json';
+// import data from './db/data.json';
 
 class App extends Component {
   constructor(props) {
