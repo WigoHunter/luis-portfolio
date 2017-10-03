@@ -32,34 +32,37 @@ class LUISWrap extends Component {
 
     submitLUISQuery(e) {
         e.preventDefault();
-        let q = this.state.query;
-        
-        this.setState({
-            chatHistory: this.state.chatHistory.concat([{
-                message: ReactDOM.findDOMNode(this.refs.query).value,
-                from: "user"
-            }]),
-            typing: true,
-            query: "",
-        }, () => {
-            let interval = setInterval(() => {
-                this.dotdotdot();
-            }, 600);
 
-            setTimeout(() => {
-                fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${q}`)
-                    .then(res => res.json())
-                    .then(json => {
-                        window.clearInterval(interval);
-                        const resource = JSON.parse(json);
-                        this.props.dispatch(resource);
-                        this.setState({
-                            typing: false,
-                            dotdotdot: ""
-                        });                    
-                    });
-            }, 600);
-        });
+        if (this.state.query.length > 0) {
+            let q = this.state.query;
+            
+            this.setState({
+                chatHistory: this.state.chatHistory.concat([{
+                    message: ReactDOM.findDOMNode(this.refs.query).value,
+                    from: "user"
+                }]),
+                typing: true,
+                query: "",
+            }, () => {
+                let interval = setInterval(() => {
+                    this.dotdotdot();
+                }, 600);
+    
+                setTimeout(() => {
+                    fetch(`https://luis-proxy.azurewebsites.net/api/HttpTriggerCSharp1?code=frYvHpy1/zSHOulYI3YHBLjBPzelfND4YD/GL6u3axD6hMkBfT88xA==&query=${q}`)
+                        .then(res => res.json())
+                        .then(json => {
+                            window.clearInterval(interval);
+                            const resource = JSON.parse(json);
+                            this.props.dispatch(resource);
+                            this.setState({
+                                typing: false,
+                                dotdotdot: ""
+                            });                    
+                        });
+                }, 600);
+            });
+        }
     }
 
     luis(msg) {

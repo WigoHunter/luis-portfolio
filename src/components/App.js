@@ -11,9 +11,9 @@ import About from './About.js';
 import Timeline, { TimelineItem } from './Timeline.js';
 import Project from './Project.js';
 import Blog from './Blog.js';
-import Skill from './Skill.js';
+import { idToDOM } from '../Utils.js';
 
-// import data from './db/data.json';
+import data from './db/data.json';
 
 class App extends Component {
   constructor(props) {
@@ -29,59 +29,7 @@ class App extends Component {
       projectFocused: false,
       // Use Redux for this part later
       // projects: data.data,
-      projects: [{
-          "name": "SITCON x HK",
-          "title": "Speaker",
-          "img": "./sitcon.jpeg",
-          "child": 
-            <div className="iframe">
-              <iframe title="sitcon" width="360" height="186" src="https://www.youtube.com/embed/auNTp1lc2ZE?start=17434" allowfullscreen></iframe>
-            </div>
-      }, {
-          "name": "BingGC UX",
-          "title": "Software Engineer Intern",
-          "img": "./binggc.png",
-          "child": 
-            <div className="binggc columns">
-              <div className="left">
-                <Skill skill="C#" bar="60%" />
-                <Skill skill="JavaScript" bar="80%" />
-                <Skill skill="HTML5 Web Worker" bar="70%" />
-              </div>
-
-              <div className="right">
-                <p>
-                  At Microsoft, I was working with the Bing Geocoding Team to build an internal debugging tool, BingGC UX, using Multi-threading C# and asynchronous JavaScript programs to handle and visualize hundreds of thousands of geocoding data.
-                </p>
-
-                <p>Read <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">full story</a>.</p>
-              </div>
-            </div>
-      }, {
-          "name": "Projectable",
-          "title": "Co-Founder",
-          "img": "./pj.png",
-          "child": 
-            <div className="pj columns">
-              <div className="left">
-                <Skill skill="React JS" bar="80%" />
-                <Skill skill="Meteor JS" bar="70%" />
-                <Skill skill="Chatbot" bar="65%" />
-              </div>
-
-              <div className="right">
-                <p>
-                  At Microsoft, I was working with the Bing Geocoding Team to build an internal debugging tool, BingGC UX, using Multi-threading C# and asynchronous JavaScript programs to handle and visualize hundreds of thousands of geocoding data.
-                </p>
-
-                <p>Read <a href="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816" target="_blank" rel="noopener noreferrer">full story</a>.</p>
-              </div>
-            </div>
-      }, {
-          "name": "E.C. Jamming",
-          "title": "Hackathon Organizor",
-          "img": "./ecj.jpg"
-      }],
+      projects: data.data.slice(0, 4),
       conversations: [
         "How was your academic exchange at University of Toronto?",
         "What is ChatWeb?",
@@ -111,6 +59,8 @@ class App extends Component {
     this.setState({
       openMenu: !this.state.openMenu
     });
+
+    console.log(this.state.projects);
   }
 
   toggleChatWeb() {
@@ -270,8 +220,7 @@ class App extends Component {
                   img={project.img}
                   onClickMore={this.setFocusOnProject}
                   unset={this.unSetFocusOnProject}
-                  child={(this.state.projectFocused && i === 0) && <div className="child">{project.child}</div>}
-                  // child={(this.state.projectFocused && i === 0) && <div className="child" dangerouslySetInnerHTML={{ __html: project.child }} />}
+                  child={(this.state.projectFocused && i === 0) && <div className="child">{idToDOM(project.id)}</div>}
                 />
               ))}
             </div>

@@ -817,7 +817,7 @@ body {
           }
         }
 
-        & .binggc .right {
+        & .binggc .right, & .pj .right, & .ecj .right, & .ut .right {
           display: flex;
           flex-direction: column;
           justify-content: center;

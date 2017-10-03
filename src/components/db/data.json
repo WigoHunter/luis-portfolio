@@ -3,18 +3,26 @@
         "name": "SITCON x HK",
         "title": "Speaker",
         "img": "./sitcon.jpeg",
-        "child": "<div className=\"iframe\"><iframe title=\"sitcon\" width=\"360\" height=\"186\" src=\"https://www.youtube.com/embed/auNTp1lc2ZE?start=17434\" allowfullscreen></iframe></div>"
+        "id": "sitcon"
     }, {
         "name": "BingGC UX",
         "title": "Software Engineer Intern",
-        "img": "./binggc.png"
+        "img": "./binggc.png",
+        "id": "binggc"
     }, {
         "name": "Projectable",
         "title": "Co-Founder",
-        "img": "./pj.png"
+        "img": "./pj.png",
+        "id": "pj"
+    }, {
+        "name": "University of Toronto",
+        "title": "Exchange Student",
+        "img": "./ut.JPG",
+        "id": "ut"
     }, {
         "name": "E.C. Jamming",
         "title": "Hackathon Organizor",
-        "img": "./ecj.jpg"
+        "img": "./ecj.jpg",
+        "id": "ecj"
     }]
 }
