@@ -15,6 +15,11 @@
         "img": "./pj.png",
         "id": "pj"
     }, {
+        "name": "AIESEC in Budapest",
+        "title": "English Camp Organizor",
+        "img": "./aiesec.jpg",
+        "id": "aiesec"
+    }, {
         "name": "University of Toronto",
         "title": "Exchange Student",
         "img": "./ut.JPG",

@@ -19,9 +19,9 @@ export const idToDOM = id => {
             return (
                 <div className="binggc columns">
                     <div className="left">
-                    <Skill skill="C#" bar="60%" />
-                    <Skill skill="JavaScript" bar="80%" />
-                    <Skill skill="HTML5 Web Worker" bar="70%" />
+                        <Skill skill="C#" bar="60%" />
+                        <Skill skill="JavaScript" bar="80%" />
+                        <Skill skill="HTML5 Web Worker" bar="70%" />
                     </div>
     
                     <div className="right">
@@ -37,9 +37,9 @@ export const idToDOM = id => {
             return (
                 <div className="pj columns">
                     <div className="left">
-                    <Skill skill="React JS" bar="80%" />
-                    <Skill skill="Meteor JS" bar="70%" />
-                    <Skill skill="Chatbot" bar="65%" />
+                        <Skill skill="React JS" bar="80%" />
+                        <Skill skill="Meteor JS" bar="70%" />
+                        <Skill skill="Chatbot" bar="65%" />
                     </div>
     
                     <div className="right">
@@ -55,9 +55,9 @@ export const idToDOM = id => {
             return (
                 <div className="ecj columns">
                     <div className="left">
-                    <Skill skill="Gulp" bar="60%" />
-                    <Skill skill="Pitching" bar="85%" />
-                    <Skill skill="Leadership" bar="75%" />
+                        <Skill skill="Gulp" bar="60%" />
+                        <Skill skill="Pitching" bar="85%" />
+                        <Skill skill="Leadership" bar="75%" />
                     </div>
         
                     <div className="right">
@@ -73,9 +73,9 @@ export const idToDOM = id => {
             return (
                 <div className="ut columns">
                     <div className="left">
-                    <Skill skill="Self-Learning Ability" bar="75%" />
-                    <Skill skill="Android App" bar="60%" />
-                    <Skill skill="Happiness" bar="90%" />
+                        <Skill skill="Self-Learning Ability" bar="75%" />
+                        <Skill skill="Android App" bar="60%" />
+                        <Skill skill="Happiness" bar="90%" />
                     </div>
         
                     <div className="right">
@@ -84,6 +84,24 @@ export const idToDOM = id => {
                         </p>
             
                         <p>Check out my <a href="https://goo.gl/9TEsQv" target="_blank" rel="noopener noreferrer">transcript</a> (Got As in CS courses when class averages were Cs).</p>
+                    </div>
+                </div>
+            );
+        case "aiesec":
+            return (
+                <div className="ut columns">
+                    <div className="left">
+                        <Skill skill="Event Management" bar="60%" />
+                        <Skill skill="International Exposure" bar="80%" />
+                        <Skill skill="Happiness" bar="90%" />
+                    </div>
+        
+                    <div className="right">
+                        <p>
+                            I joined the program in my freshman year as an oversea camp facilitator for AIESEC Budapest. There were other 15 facilitators from over 10 countries in the world. Our daily job was to have fun with local high school students while teaching them English, sharing our cultures as well as learning theirs from them!
+                        </p>
+            
+                        <p>Check out my <a href="http://wigoxearth.blogspot.hk/2014/07/blog-post.html" target="_blank" rel="noopener noreferrer">Blog post</a> (in Chinese).</p>
                     </div>
                 </div>
             );
