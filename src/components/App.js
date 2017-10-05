@@ -32,7 +32,7 @@ class App extends Component {
       projects: data.data.slice(0, 4),
       conversations: [
         "What is ChatWeb?",
-        "Was you the speaker sharing React & Meteor at SITCON HK 2016?",
+        "Was you the speaker sharing React and Meteor at SITCON HK 2016?",
         "How was the exchange to University of Toronto?",
         "What did you do in AIESEC Hungary?",
       ],
