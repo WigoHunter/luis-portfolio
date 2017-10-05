@@ -1,33 +1,38 @@
 {
     "data": [{
-        "name": "SITCON x HK",
-        "title": "Speaker",
-        "img": "./sitcon.jpeg",
-        "id": "sitcon"
-    }, {
-        "name": "BingGC UX",
+        "name": "Bing Geocoding",
         "title": "Software Engineer Intern",
-        "img": "./binggc.png",
+        "img": "./team.jpeg",
         "id": "binggc"
+    }, {
+        "name": "E.C. Jamming",
+        "title": "Hackathon Organizor",
+        "img": "./ecj.JPG",
+        "id": "ecj"
     }, {
         "name": "Projectable",
         "title": "Co-Founder",
         "img": "./pj.png",
         "id": "pj"
     }, {
-        "name": "AIESEC in Budapest",
-        "title": "English Camp Organizor",
-        "img": "./aiesec.jpg",
-        "id": "aiesec"
+        "name": "CityU Apps Lab",
+        "title": "Full-Stack Developer Trainee",
+        "img": "./cal.jpg",
+        "id": "cal"
     }, {
         "name": "University of Toronto",
         "title": "Exchange Student",
         "img": "./ut.JPG",
         "id": "ut"
     }, {
-        "name": "E.C. Jamming",
-        "title": "Hackathon Organizor",
-        "img": "./ecj.jpg",
-        "id": "ecj"
+        "name": "SITCON x HK",
+        "title": "Speaker",
+        "img": "./sitcon.jpeg",
+        "id": "sitcon"
+    }, {
+        "name": "AIESEC in Budapest",
+        "title": "English Camp Organizor",
+        "img": "./aiesec.jpg",
+        "id": "aiesec"
     }]
 }

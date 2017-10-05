@@ -31,10 +31,18 @@ class App extends Component {
       // projects: data.data,
       projects: data.data.slice(0, 4),
       conversations: [
-        "How was your academic exchange at University of Toronto?",
         "What is ChatWeb?",
-        "What did you do in the AIESEC exchange to Budapest?",
-        "What is your next steps?"
+        "Was you the speaker sharing React & Meteor at SITCON HK 2016?",
+        "How was the exchange to University of Toronto?",
+        "What did you do in AIESEC Hungary?",
+      ],
+      hereYouGo: [
+        "Here you go! Hope you enjoy this :)",
+        "Here you go! Is there anything else I can answer?",
+        "Here you go! Can I help you with something more?",
+        "Here! Any other questions? :)",
+        "Glad you asked!",
+        "Enjoy! Let me know when I can help next time!",
       ]
     }
 
@@ -47,6 +55,7 @@ class App extends Component {
     this.setAppState = this.setAppState.bind(this);
     this.scrollTo = this.scrollTo.bind(this);
     this.dispatch = this.dispatch.bind(this);
+    this.hereYouGo = this.hereYouGo.bind(this);
   }
 
   toggleChat() {
@@ -59,8 +68,6 @@ class App extends Component {
     this.setState({
       openMenu: !this.state.openMenu
     });
-
-    console.log(this.state.projects);
   }
 
   toggleChatWeb() {
@@ -72,10 +79,18 @@ class App extends Component {
   setFocusOnProject(name) {
     let projectList = [];
     
-    for (let i = 0; i < this.state.projects.length; i++) {
-      this.state.projects[i].name === name
-        ? projectList.unshift(this.state.projects[i])
-        : projectList.push(this.state.projects[i])
+    if (this.state.projects.findIndex(x => x.name === name) !== -1) {
+      for (let i = 0; i < this.state.projects.length; i++) {
+        this.state.projects[i].name === name
+          ? projectList.unshift(this.state.projects[i])
+          : projectList.push(this.state.projects[i])
+      }
+    } else {
+      projectList.push(data.data.find(x => x.name === name));
+
+      for (let i = 0; i < 3; i++) {
+        projectList.push(this.state.projects[i]);
+      }
     }
 
     this.setState({
@@ -112,17 +127,101 @@ class App extends Component {
     });
   }
 
+  hereYouGo() {
+    let index = Math.floor(Math.random() * 6);
+
+    this.refs.luis.wait(1500).then(
+      _ => {
+        this.refs.luis.luis(this.state.hereYouGo[index]);
+      }
+    )
+    this.scrollTo("projects");
+  }
+
   dispatch(req) {
-    console.log(req);
+    if(req.hasOwnProperty("error")) {
+      this.refs.luis.luis("Sorry, I don't think I quite understand the question...");
+      this.refs.luis.wait(1200).then(
+        _ => {
+          this.refs.luis.luis("My creator has been notified. He will look into the issue! Thank you! :)");
+        }
+      )
+      return;
+    }
 
     switch(req.topScoringIntent.intent) {
       case "WhatIsChatWeb":
         this.scrollTo("chatweb");
-        this.toggleChatWeb();
+        this.setState({
+          openChatWeb: true
+        });
         this.refs.luis.luis("Here you go! Any further questions?");
         break;
       case "greet":
         this.refs.luis.luis("Hi! How are you doing!");
+        break;
+      case "CleanerWeb":
+        this.refs.luis.luis("You don't have to show everything to users at first.");
+        this.refs.luis.wait(1500).then(
+          _ => {
+            this.refs.luis.luis("At the same time, Chatweb also offer users the ability to ask for more. Why not try \"Tell me about your exchange to Toronto\"");
+          }
+        );        
+        break;
+      case "CompareToChatbot":
+        this.refs.luis.luis("Well, traditional chatbots are built on messengers, which means users are limited to feasible interactions within the scope of messages.");
+        this.refs.luis.wait(1500).then(
+          _ => {
+            this.refs.luis.luis("On the other hand, you can build all the possible interactions on web! You can log users in, you can do all your backend operations :)");
+          }
+        );
+        break;
+      case "Engagement":
+        this.refs.luis.luis("It's fun!");
+        this.refs.luis.wait(1400).then(
+          _ => {
+            this.refs.luis.luis("Joking aside, I do believe this opens possibilities of new ways to engage users on web; especially speech detections are getting mature, users will actually talk to webs in near future.");
+          }
+        );
+        break;
+      case "Navigate":
+        this.refs.luis.luis("You can just tell the website what to show you!");
+        this.refs.luis.wait(1000).then(
+          _ => {
+            this.refs.luis.luis("Try something like \"Show me more about your experiences at Microsoft.\"");
+          }
+        )
+        break;
+      case "Extend":
+        this.refs.luis.luis("This is a simple portfolio site, but you can also imagine using this NLP ability in cases like user authentication, search and even sending messages to others using Socket.");
+        break;
+      case "Projectable":
+        this.hereYouGo();
+        this.setFocusOnProject("Projectable");
+        break;
+      case "ECJ":
+        this.hereYouGo();
+        this.setFocusOnProject("E.C. Jamming");
+        break;
+      case "CAL":
+        this.hereYouGo();
+        this.setFocusOnProject("CityU Apps Lab");
+        break;
+      case "Microsoft":
+        this.hereYouGo();
+        this.setFocusOnProject("Bing Geocoding");
+        break;
+      case "UT":
+        this.hereYouGo();
+        this.setFocusOnProject("University of Toronto");
+        break;
+      case "SITCON":
+        this.hereYouGo();
+        this.setFocusOnProject("SITCON x HK");
+        break;
+      case "AIESEC":
+        this.hereYouGo();
+        this.setFocusOnProject("AIESEC in Budapest");
         break;
       default:
         break;
@@ -206,6 +305,16 @@ class App extends Component {
                   link: "https://25sprout.com/"
                 }}
               />
+
+              <TimelineItem
+                title="Full-stack Developer Trainee"
+                time="Jan - May / 2016"
+                intro="Joined the lab to develop a photo sharing platform, which was later invited to be exhibited in HKTDC International ICT Expo 2016, using Meteor JS, Blaze and Bootstrap."
+                company={{
+                  name: "CityU Apps Lab",
+                  link: "http://appslab.hk/"
+                }}
+              />
             </Timeline>
           </div>
 
@@ -284,7 +393,7 @@ class App extends Component {
 
               <ul>
                 <li onClick={() => this.chat('What do you mean by "Cleaner default layout"')}>Cleaner Default Layout</li>
-                <li onClick={() => this.chat('What do you mean by "Interactivity"?')}>Interactivity on Web</li>
+                <li onClick={() => this.chat('How do you "engage" users?')}>Better User Engagement</li>
                 <li onClick={() => this.chat('What interations do chatbots not have?')}>Richer Interactions than Chatbots</li>
                 <li onClick={() => this.chat('What "New way to navigate"')}>New way to navigate</li>
                 <li onClick={() => this.chat('"Extend" to what?')}>Extendablitity</li>

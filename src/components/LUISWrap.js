@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import firebase from '../firebase.js';
 import './App.css';
 import 'whatwg-fetch';
 
@@ -20,6 +21,7 @@ class LUISWrap extends Component {
         this.updateQuery = this.updateQuery.bind(this);
         this.toggle = this.toggle.bind(this);
         this.luis = this.luis.bind(this);
+        this.wait = this.wait.bind(this);
     }
 
     componentDidMount() {
@@ -28,6 +30,38 @@ class LUISWrap extends Component {
 
     componentDidUpdate() {
         this.scrollToBottom();
+    }
+
+    pushFirebase(q, msg) {
+        const ref = firebase.database().ref("luis");
+        ref.push({
+            q,
+            msg
+        });
+    }
+
+    wait(time) {
+        return new Promise((resolve, reject) => {
+            this.setState({
+                typing: true,
+                dotdotdot: "",
+            });
+
+            let interval = setInterval(() => {
+                this.dotdotdot();
+            }, 600);
+
+            setTimeout(() => {
+                this.setState({
+                    typing: false,
+                    dotdotdot: "",
+                });
+
+                window.clearInterval(interval);
+
+                resolve("success");
+            }, time);
+        });
     }
 
     submitLUISQuery(e) {
@@ -54,11 +88,20 @@ class LUISWrap extends Component {
                         .then(json => {
                             window.clearInterval(interval);
                             const resource = JSON.parse(json);
-                            this.props.dispatch(resource);
-                            this.setState({
-                                typing: false,
-                                dotdotdot: ""
-                            });                    
+
+                            if(resource.hasOwnProperty("topScoringIntent")) {
+                                this.pushFirebase(resource.query, resource.topScoringIntent.intent);
+                            }
+
+                            this.props.dispatch(
+                                resource.topScoringIntent.score < 0.3
+                                    ? { error: "low confidence" }
+                                    : resource
+                            );
+                            // this.setState({
+                            //     typing: false,
+                            //     dotdotdot: ""
+                            // });                    
                         });
                 }, 600);
             });

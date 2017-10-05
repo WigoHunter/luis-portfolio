@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Menu = ({ open, toggleMenu, scrollTo }) => (
+const Menu = ({ open, toggleMenu, scrollTo, randomQ }) => (
     <div>
         <div className={`toggle ${open && "open"}`} onClick={() => toggleMenu()}>
             <span></span>

@@ -11,8 +11,20 @@ export const idToDOM = id => {
     switch(id) {
         case "sitcon":
             return (
-                <div className="iframe">
-                    <iframe title="sitcon" width="360" height="186" src="https://www.youtube.com/embed/auNTp1lc2ZE?start=17434" allowfullscreen></iframe>
+                <div className="sitcon columns">
+                    <div className="left">
+                        <Skill skill="Meteor JS" bar="70%" />
+                        <Skill skill="React JS" bar="85%" />
+                        <Skill skill="Public Speaking" bar="75%" />
+                    </div>
+
+                    <div className="right">
+                        <p>
+                            SITCON is one of the largest student tech conferences in Asia. I was one of the speakers in 2016 and talked about Meteor JS and React JS as in the modern web development.
+                        </p>
+        
+                        <p>Check out <a href="https://www.youtube.com/embed/auNTp1lc2ZE?start=17434" target="_blank" rel="noopener noreferrer">video of the talk</a>.</p>
+                    </div>
                 </div>
             );
         case "binggc":
@@ -80,7 +92,7 @@ export const idToDOM = id => {
         
                     <div className="right">
                         <p>
-                            I started to become a self-taught programmer at University of Toronto. They offered great courses (I really enjoyed the Software Design course where we developed an working Android App) and a great balance of workloads in courses. I spent my free time learning Web Programming (and got <a href="https://about.udemy.com/students/student-profile-kevin-hsu/" target="_blank" rel="noopener noreferrer">interviewed by Udemy</a>) and travelling around the city!
+                            Toronto is one of my favorite city now! Miss Tim Horton's so much! UT offered great courses (I really enjoyed the Software Design course where we developed an working Android App) and a great balance of workloads in courses. I spent my free time learning Web Programming (and got <a href="https://about.udemy.com/students/student-profile-kevin-hsu/" target="_blank" rel="noopener noreferrer">interviewed by Udemy</a>) and travelling around the city!
                         </p>
             
                         <p>Check out my <a href="https://goo.gl/9TEsQv" target="_blank" rel="noopener noreferrer">transcript</a> (Got As in CS courses when class averages were Cs).</p>
@@ -89,7 +101,7 @@ export const idToDOM = id => {
             );
         case "aiesec":
             return (
-                <div className="ut columns">
+                <div className="aiesec columns">
                     <div className="left">
                         <Skill skill="Event Management" bar="60%" />
                         <Skill skill="International Exposure" bar="80%" />
@@ -102,6 +114,24 @@ export const idToDOM = id => {
                         </p>
             
                         <p>Check out my <a href="http://wigoxearth.blogspot.hk/2014/07/blog-post.html" target="_blank" rel="noopener noreferrer">Blog post</a> (in Chinese).</p>
+                    </div>
+                </div>
+            );
+        case "cal":
+            return (
+                <div className="cal columns">
+                    <div className="left">
+                        <Skill skill="Meteor JS" bar="75%" />
+                        <Skill skill="Node JS" bar="60%" />
+                        <Skill skill="PostCSS" bar="70%" />
+                    </div>
+        
+                    <div className="right">
+                        <p>
+                            I was the first non-City University student who joined CityU Apps Lab. I proactively reached out to the director of the lab and worked under himself to develop a photo sharing web app, which was later exhibited in HKTDC International ICT Expo 2016.
+                        </p>
+            
+                        <p>Unfortunately, the project is currently shut down.</p>
                     </div>
                 </div>
             );
