@@ -90,7 +90,7 @@ class LUISWrap extends Component {
                             const resource = JSON.parse(json);
 
                             if(resource.hasOwnProperty("topScoringIntent")) {
-                                this.pushFirebase(resource.query, resource.topScoringIntent.intent);
+                                this.pushFirebase(resource.query, resource.topScoringIntent.score < 0.3 ? "LOW_CONFIDENCE" : resource.topScoringIntent.intent);
                             }
 
                             this.props.dispatch(

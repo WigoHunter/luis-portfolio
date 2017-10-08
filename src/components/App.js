@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import scrollIntoView from 'scroll-into-view';
+import ReactGA from 'react-ga';
 import './App.css';
 
 import LUISWrap from './LUISWrap.js';
@@ -45,6 +46,9 @@ class App extends Component {
         "Enjoy! Let me know when I can help next time!",
       ]
     }
+
+    ReactGA.initialize("UA-107559421-1");
+    ReactGA.pageview(window.location.pathname);
 
     this.toggleChat = this.toggleChat.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
