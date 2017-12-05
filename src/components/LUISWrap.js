@@ -34,10 +34,16 @@ class LUISWrap extends Component {
 
     pushFirebase(q, msg) {
         const ref = firebase.database().ref("luis");
-        ref.push({
-            q,
-            msg
-        });
+        fetch("http://freegeoip.net/json/")
+            .then(res => res.json())
+            .then(json => {
+                ref.push({
+                    q,
+                    msg,
+                    country: json.city.length > 0 ? json.city : json.country_name
+                });
+            })
+            .catch(e => {})
     }
 
     wait(time) {

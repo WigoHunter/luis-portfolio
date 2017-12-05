@@ -44,7 +44,8 @@ class App extends Component {
         "Here! Any other questions? :)",
         "Glad you asked!",
         "Enjoy! Let me know when I can help next time!",
-      ]
+      ],
+      openFullList: false,
     }
 
     ReactGA.initialize("UA-107559421-1");
@@ -227,6 +228,10 @@ class App extends Component {
         this.hereYouGo();
         this.setFocusOnProject("AIESEC in Budapest");
         break;
+      case "Mapful":
+        this.hereYouGo();
+        this.setFocusOnProject("Mapful");
+        break;
       default:
         break;
     }
@@ -235,6 +240,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className={`full-list ${this.state.openFullList ? "open" : ""}`}>
+          <span className="x" onClick={() => this.setState({ openFullList: false })}>＋</span>
+        </div>
         <Menu
           open={this.state.openMenu}
           toggleMenu={this.toggleMenu}
@@ -260,7 +268,10 @@ class App extends Component {
           ref="luis"
         >
           <div className="container reminder">
-            <h2>Let me remind you once more. <span>You can really talk to this website.</span></h2>
+            <h2>Let me remind you once more.
+              {/* work in progress */}
+              <span onClick={() => {/* this.setState({ openFullList: true }) */}}>You can really talk to this website.</span>
+            </h2>
             <p>Feel free to ask it any question.</p>
             <p>It will respond with a new layout and contents that suit your interests.</p>
           </div>

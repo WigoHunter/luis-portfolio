@@ -5,15 +5,20 @@
         "img": "./team.jpeg",
         "id": "binggc"
     }, {
-        "name": "E.C. Jamming",
-        "title": "Hackathon Organizor",
-        "img": "./ecj.JPG",
-        "id": "ecj"
+        "name": "Mapful",
+        "title": "Co-Founder",
+        "img": "./mapful.jpeg",
+        "id": "mapful"
     }, {
         "name": "Projectable",
         "title": "Co-Founder",
         "img": "./pj.png",
         "id": "pj"
+    }, {
+        "name": "E.C. Jamming",
+        "title": "Hackathon Organizor",
+        "img": "./ecj.JPG",
+        "id": "ecj"
     }, {
         "name": "CityU Apps Lab",
         "title": "Full-Stack Developer Trainee",
