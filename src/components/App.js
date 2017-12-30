@@ -13,6 +13,8 @@ import Timeline, { TimelineItem } from './Timeline.js';
 import Project from './Project.js';
 import Blog from './Blog.js';
 import { idToDOM } from '../Utils.js';
+// All projects page is work-in-progress
+// import AllProjects from './AllProjects';
 
 import data from './db/data.json';
 
@@ -45,7 +47,7 @@ class App extends Component {
         "Glad you asked!",
         "Enjoy! Let me know when I can help next time!",
       ],
-      openFullList: false,
+      // openFullList: true,
     }
 
     ReactGA.initialize("UA-107559421-1");
@@ -232,6 +234,13 @@ class App extends Component {
         this.hereYouGo();
         this.setFocusOnProject("Mapful");
         break;
+      case "ShowAll":
+        this.hereYouGo();
+        this.scrollTo("projects");
+        break;
+      case "Compliment":
+        this.refs.luis.luis("Thank you! That is really kind! :)");
+        break;
       default:
         break;
     }
@@ -240,9 +249,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className={`full-list ${this.state.openFullList ? "open" : ""}`}>
-          <span className="x" onClick={() => this.setState({ openFullList: false })}>＋</span>
-        </div>
+        {/*
+          <AllProjects
+            open={this.state.openFullList}
+            toggleOpen={() => this.setState({ openFullList: false })}
+          />
+        */}
         <Menu
           open={this.state.openMenu}
           toggleMenu={this.toggleMenu}
@@ -270,7 +282,7 @@ class App extends Component {
           <div className="container reminder">
             <h2>Let me remind you once more.
               {/* work in progress */}
-              <span onClick={() => {/* this.setState({ openFullList: true }) */}}>You can really talk to this website.</span>
+              <span onClick={() => {/* this.setState({ openFullList: true })*/}}>You can really talk to this website.</span>
             </h2>
             <p>Feel free to ask it any question.</p>
             <p>It will respond with a new layout and contents that suit your interests.</p>

@@ -1450,6 +1450,11 @@ body {
   z-index: 1000;
   transform: translateX(-100%);
   transition: transform 1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 80px 0;
 
   &.open {
     transform: translateX(0);
@@ -1468,6 +1473,17 @@ body {
     &:hover {
       transform: scale(1.1) rotate(45deg);
       opacity: 0.8;
+    }
+  }
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .title {
+      color: var(--green);
+      letter-spacing: 1.6px;
     }
   }
 }
