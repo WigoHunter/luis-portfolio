@@ -4,6 +4,28 @@ import firebase from '../firebase.js';
 import './App.css';
 import 'whatwg-fetch';
 
+/*
+
+    * = optional prop
+    - = in component state
+
+    <LUISWrap
+        luisEndPoint={STRING}
+        dispatch={FUNCTION}
+        * chatroom={FUNCTION - RENDER CHATROOM}
+
+        
+        - openChat
+        - typing
+        - query
+        - intent
+        - chatHistory
+        - dotdotdot
+    >
+        {children}
+    </LUISWrap>
+*/
+
 class LUISWrap extends Component {
     constructor(props) {
         super(props);

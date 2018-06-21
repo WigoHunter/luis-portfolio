@@ -65,18 +65,21 @@ class App extends Component {
     this.hereYouGo = this.hereYouGo.bind(this);
   }
 
+  // Redux state: openChat
   toggleChat() {
     this.setState({
       openChat: !this.state.openChat
     });
   }
 
+  // Redux state: openMenu
   toggleMenu() {
     this.setState({
       openMenu: !this.state.openMenu
     });
   }
 
+  // Redux state: openChatWeb (the part at the bottom "what is chatweb")
   toggleChatWeb() {
     this.setState({
       openChatWeb: !this.state.openChatWeb
