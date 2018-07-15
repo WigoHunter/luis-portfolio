@@ -11,9 +11,9 @@ const Menu = ({ open, toggleMenu, scrollTo, randomQ }) => (
         <ul className={`menu ${open && "open"}`}>
             <li className={open && "open"} onClick={() => scrollTo("about")}>About Me</li>
             <li className={open && "open"} onClick={() => scrollTo("experiences")}>Experiences</li>
-            <li className={open && "open"} onClick={() => scrollTo("projects")}>Projects</li>
+            <li className={`hide-on-mobile ${open && "open"}`} onClick={() => scrollTo("projects")}>Projects</li>
             <li className={open && "open"} onClick={() => scrollTo("blogs")}>Blog Posts</li>
-            <li className={open && "open"} onClick={() => scrollTo("chatweb")}>What is <span>ChatWeb</span></li>
+            <li className={`hide-on-mobile ${open && "open"}`} onClick={() => scrollTo("chatweb")}>What is <span>ChatWeb</span></li>
         </ul>
     </div>
 );

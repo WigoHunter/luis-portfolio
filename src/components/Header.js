@@ -31,12 +31,12 @@ class Header extends Component {
         <div className="profile">
           <div className="pic" style={{ background: "url(/me.jpeg) center center / cover" }}></div>
           <h2>Kevin Hsu</h2>
-          <p className="subtitle">Software Engineer | Tech Blogger | Student</p>
+          <p className="subtitle">Changing the World @Cornell Tech</p>
           <div className="line"></div>
-          <p>
+          <p className="hide-on-mobile">
             Not the normal portfolio page you've seen.
           </p>
-          <p>You can, quite literally, <span onClick={() => toggleChat()}>TALK</span> to this website.</p>
+          <p className="hide-on-mobile">You can, quite literally, <span onClick={() => toggleChat()}>TALK</span> to this website.</p>
         
           <div className="links">
             <a href="https://medium.com/@kevin.wcb" rel="noopener noreferrer" target="_blank"><i className="fa fa-medium"></i></a>

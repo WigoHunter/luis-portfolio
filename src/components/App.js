@@ -282,7 +282,7 @@ class App extends Component {
           dispatch={this.dispatch}
           ref="luis"
         >
-          <div className="container reminder">
+          <div className="container reminder hide-on-mobile">
             <h2>Let me remind you once more.
               {/* work in progress */}
               <span onClick={() => {/* this.setState({ openFullList: true })*/}}>You can really talk to this website.</span>
@@ -348,7 +348,7 @@ class App extends Component {
             </Timeline>
           </div>
 
-          <div className="container projects" ref="projects">
+          <div className="container projects hide-on-mobile" ref="projects">
             <h2 className="sec-title">Projects</h2>
             <div className={`row ${this.state.projectFocused && "focus"}`}>
               {this.state.projects.map((project, i) => (
@@ -364,7 +364,7 @@ class App extends Component {
               ))}
             </div>
 
-            <div className="row conversations">
+            <div className="row conversations hide-on-mobile">
               <h3>... Interested in something else? <span>Why not talk to Mr. ChatWeb!</span></h3>
               <ul>
                 {this.state.conversations.map((msg, i) => (
@@ -377,8 +377,8 @@ class App extends Component {
           </div>
 
           <div className="container blogs" ref="blogs">
-            <h2 className="sec-title">Blogs</h2>
-            <h3 className="following">Really treats blogging seriously. I love writing and sharing.</h3>
+            <h2 className="sec-title">Selected Blog Posts</h2>
+            <h3 className="following hide-on-mobile">Really treats blogging seriously. I love writing and sharing.</h3>
             <div className="row">
               <Blog
                 link="https://hackernoon.com/thank-you-microsoft-for-the-amazing-software-engineer-internship-407a49b8f816"
@@ -409,7 +409,7 @@ class App extends Component {
             </a>
           </div>
 
-          <div className={`container chatweb ${this.state.openChatWeb && "open"}`} ref="chatweb">
+          <div className={`container chatweb hide-on-mobile ${this.state.openChatWeb && "open"}`} ref="chatweb">
             <div className="title" onClick={() => this.toggleChatWeb()}>
               > What is <span className="highlight">ChatWeb</span>?<span className="cursor">|</span>
             </div>

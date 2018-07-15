@@ -178,7 +178,7 @@ class LUISWrap extends Component {
 
         return (
             <div className="luis-wrap">
-                <div className={`luis-chat ${openChat && "open"}`}>
+                <div className={`luis-chat hide-on-mobile ${openChat && "open"}`}>
                     <h2 onClick={() => this.toggle()}>
                         <span className="green-dot"></span>
                         Mr. ChatWeb
